@@ -10,7 +10,13 @@
   },
   "dependencies": {
     "expo": "^30.0.1",
+    "mongodb": "^3.1.6",
+    "native-base": "^2.8.0",
     "react": "16.3.1",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz"
+    "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
+    "react-native-easy-grid": "^0.2.0",
+    "react-native-increibles-alertas": "^1.0.4",
+    "react-native-simple-animations": "^0.1.2",
+    "react-navigation": "^2.16.0"
   }
 }
