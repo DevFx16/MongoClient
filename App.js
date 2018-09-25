@@ -1,5 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { createStackNavigator } from 'react-navigation';
+import Añadir from './Src/Components/AñadirConexion';
+import Estilos from './Src/Styles/Style';
+import { View, Spinner } from 'native-base';
 
 export default class App extends React.Component {
 
@@ -17,19 +20,18 @@ export default class App extends React.Component {
   }
 
   render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
-    );
+    if (this.state.Load) {
+      return (<Navigation></Navigation>);
+    } else {
+      return (
+        <View style={[Estilos.Content, Estilos.CenterFlex]}>
+          <Spinner color='violet' size='large'></Spinner>
+        </View>
+      )
+    }
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const Navigation = createStackNavigator({
+  Añadir: { screen: Añadir, navigationOptions: () => ({ header: null }) },
+})
