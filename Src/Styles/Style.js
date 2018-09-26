@@ -6,5 +6,16 @@ export default Estilo = StyleSheet.create({
     CenterFlex: {
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    Imagen: {
+        width: '80%',
+        height: '80%',
+        flex: 1
+    },
+    Picker: {
+        width: '100%'
+    },
+    Margen: {
+        marginTop: 10
     }
 })
