@@ -1,14 +1,16 @@
 import React from 'react';
+import { StatusBar } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import Añadir from './Src/Components/AñadirConexion';
-import Estilos from './Src/Styles/Style';
-import { View, Spinner } from 'native-base';
+import Home from './Src/Components/Home';
+import { AppLoading } from 'expo';
 
 export default class App extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = { Load: false }
+    StatusBar.setHidden(true);
   }
 
   async componentWillMount() {
@@ -23,15 +25,12 @@ export default class App extends React.Component {
     if (this.state.Load) {
       return (<Navigation></Navigation>);
     } else {
-      return (
-        <View style={[Estilos.Content, Estilos.CenterFlex]}>
-          <Spinner color='violet' size='large'></Spinner>
-        </View>
-      )
+      return (<AppLoading></AppLoading>);
     }
   }
 }
 
 const Navigation = createStackNavigator({
+  Home: { screen: Home, navigationOptions: () => ({ header: null }) },
   Añadir: { screen: Añadir, navigationOptions: () => ({ header: null }) },
 })

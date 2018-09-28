@@ -87,8 +87,11 @@ export default class AñadirConexion extends React.Component {
                                         {this.state.Password.Error && this.state.Estado == '2' ? <Icon name='close-circle' /> : null}
                                     </Item>
                                     <Button block success style={Estilos.Margen} iconLeft>
-                                        <Icon active name='database-plus' type='MaterialCommunityIcons' />
+                                        <Icon active name='lan-connect' type='MaterialCommunityIcons' />
                                         <Text>Conectar</Text>
+                                    </Button>
+                                    <Button block transparent style={Estilos.Margen} onPress={() => {this.props.navigation.navigate('Home')}}>
+                                        <Text>Cancelar</Text>
                                     </Button>
                                 </Form>
                             </Row>

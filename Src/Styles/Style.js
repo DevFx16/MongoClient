@@ -17,5 +17,11 @@ export default Estilo = StyleSheet.create({
     },
     Margen: {
         marginTop: 10
+    },
+    Header: {
+        backgroundColor: 'green'
+    },
+    Color: {
+        color: 'green'
     }
 })
