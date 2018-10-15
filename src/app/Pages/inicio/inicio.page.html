@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-button color="success" slot="start" [routerLink]="['/Agregar']" routerLinkActive="router-link-active" >
+    <ion-button color="success" slot="start" [routerLink]="['/Agregar']" routerLinkActive="router-link-active">
       <ion-icon slot="icon-only" name="add-circle"></ion-icon>
     </ion-button>
     <ion-title>Conexiones</ion-title>
@@ -8,5 +8,24 @@
 </ion-header>
 
 <ion-content padding>
-
+  <div *ngIf="this.Conexiones.length > 0; else Imagen">
+    <ion-list>
+      <ion-item-sliding>
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="https://png.icons8.com/color/1600/mongodb.png">
+          </ion-avatar>
+          <ion-label>Url De mongo</ion-label>
+        </ion-item>
+        <ion-item-options side="start">
+          <ion-item-option color="danger" mode="md">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+  <ng-template #Imagen>
+    <ion-img style="height: 100%;" src="https://icon-icons.com/icons2/1353/PNG/512/if-word-18-2875628_88181.png"></ion-img>
+  </ng-template>
 </ion-content>

@@ -8,9 +8,12 @@ import { Router } from '@angular/router';
 })
 export class InicioPage implements OnInit {
 
+  Conexiones: object[];
+
   constructor(private _Router: Router) { }
 
   ngOnInit() {
+    this.Conexiones = [];
   }
 
   Agregar(): void {
