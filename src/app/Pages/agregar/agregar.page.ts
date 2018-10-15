@@ -9,9 +9,12 @@ import { Router } from '@angular/router';
 
 export class AgregarPage implements OnInit {
 
+  Opcion: boolean;
+
   constructor(private _Router: Router) { }
 
   ngOnInit() {
+    this.Opcion = false;
   }
 
 }

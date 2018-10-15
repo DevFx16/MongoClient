@@ -11,7 +11,7 @@
   <ion-list>
     <ion-item>
       <ion-label>Metodo de conexión</ion-label>
-      <ion-select value="0" ok-text="Escoger" cancel-text="Cancelar">
+      <ion-select value="0" ok-text="Escoger" cancel-text="Cancelar" #Valor (ionChange)="this.Opcion = Valor.value == '1'">
         <ion-select-option value="0">Url</ion-select-option>
         <ion-select-option value="1">Campos</ion-select-option>
       </ion-select>
@@ -19,24 +19,24 @@
     <ion-item-divider color="light">
       <ion-label>Url</ion-label>
     </ion-item-divider>
-    <ion-item>
-      <ion-input placeholder="Url" clearInput></ion-input>
+    <ion-item [disabled]="this.Opcion">
+      <ion-input placeholder="Url" clearInput [disabled]="this.Opcion"></ion-input>
     </ion-item>
     <ion-item-divider color="light">
       <ion-label>Campos</ion-label>
     </ion-item-divider>
-    <ion-item>
-      <ion-input placeholder="Host" clearInput></ion-input>
+    <ion-item [disabled]="!this.Opcion">
+      <ion-input placeholder="Host" clearInput [disabled]="!this.Opcion"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-input placeholder="Puerto" clearInput></ion-input>
+    <ion-item [disabled]="!this.Opcion">
+      <ion-input placeholder="Puerto" clearInput [disabled]="!this.Opcion"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-input placeholder="Base de Datos" clearInput></ion-input>
+    <ion-item [disabled]="!this.Opcion">
+      <ion-input placeholder="Base de Datos" clearInput [disabled]="!this.Opcion"></ion-input>
     </ion-item>
     <ion-item-divider color="light">
       <ion-label>Autenticación</ion-label>
-      <ion-checkbox color="success"></ion-checkbox>
+      <ion-checkbox color="success" [disabled]="!this.Opcion"></ion-checkbox>
     </ion-item-divider>
     <ion-item>
       <ion-input placeholder="Usuario" clearInput></ion-input>
