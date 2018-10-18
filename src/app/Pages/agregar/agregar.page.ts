@@ -11,13 +11,16 @@ import swal from 'sweetalert';
 
 export class AgregarPage implements OnInit {
 
-  Opcion: boolean;
-  Conexion = { Host: '', Puerto: 80, Base: '', Auth: false, User: '', Password: '', Url: '' };
+  Opcion: boolean = false;
+  Conexion:object = { Host: '', Puerto: 80, Base: '', Auth: false, User: '', Password: '', Url: '' };
 
   constructor(private _Conexion: MongoConexionService, private _Router: Router) { }
 
-  ngOnInit() {
-    this.Opcion = false;
+  ngOnInit() {}
+
+  Select(Valor): void {
+    this.Opcion = Valor == '1';
+    this.Conexion = {Host: '', Puerto: 80, Base: '', Auth: false, User: '', Password: '', Url: '' }
   }
 
   ClickConexion(): void {
@@ -25,11 +28,7 @@ export class AgregarPage implements OnInit {
       if (this.Conexion.Url.length <= 0) {
         swal('Error', 'Url requerida', 'error');
       } else {
-        this._Conexion.Conexion(this.Conexion.Url).then(() => {
-          swal('Correcto', 'Conexión Establecida', 'success');
-        }).catch(err => {
-          swal('Error', err+'', 'error');
-        })
+
       }
     } else {
       if (this.Conexion.Host.length <= 0 || this.Conexion.Base.length <= 0 || this.Conexion.Puerto == null) {

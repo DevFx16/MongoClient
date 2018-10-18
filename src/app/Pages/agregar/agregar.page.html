@@ -11,7 +11,7 @@
   <ion-list>
     <ion-item>
       <ion-label>Metodo de conexión</ion-label>
-      <ion-select value="0" ok-text="Escoger" cancel-text="Cancelar" #Valor (ionChange)="this.Opcion = Valor.value == '1'">
+      <ion-select value="0" ok-text="Escoger" cancel-text="Cancelar" #Valor (ionChange)="this.Select(Valor.value)">
         <ion-select-option value="0">Url</ion-select-option>
         <ion-select-option value="1">Campos</ion-select-option>
       </ion-select>

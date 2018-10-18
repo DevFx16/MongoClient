@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import Mongo from 'mongodb';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +11,7 @@ export class MongoConexionService {
   constructor() { }
 
   Conexion(Url: string) {
-    return new Promise((resolve, reject) => {
-      Mongo.connect(Url, { useNewUrlParser: true }).then((client) => {
-        this.Guardar(Url);
-        client.close(true);
-        resolve()
-      }).catch((err) => {
-        reject(err);
-      })
-    })
+
   }
 
   private Guardar(Obje: string) {
