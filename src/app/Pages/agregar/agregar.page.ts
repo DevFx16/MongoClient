@@ -12,7 +12,7 @@ import swal from 'sweetalert';
 export class AgregarPage implements OnInit {
 
   Opcion: boolean = false;
-  Conexion:object = { Host: '', Puerto: 80, Base: '', Auth: false, User: '', Password: '', Url: '' };
+  Conexion = { Host: '', Puerto: 80, Base: '', Auth: false, User: '', Password: '', Url: '' };
 
   constructor(private _Conexion: MongoConexionService, private _Router: Router) { }
 
