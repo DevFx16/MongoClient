@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd} from '@angular/router';
+import { MongoConexionService } from '../../Services/MongoConexion/mongo-conexion.service';
+import Conexion from '../../Models/Conexion';
 
 @Component({
   selector: 'app-inicio',
@@ -8,12 +10,20 @@ import { Router } from '@angular/router';
 })
 export class InicioPage implements OnInit {
 
-  Conexiones: object[];
+  Conexiones: Conexion[];
 
-  constructor(private _Router: Router) { }
+  constructor(private _Router: Router, private _Conexion: MongoConexionService) {
+    this._Router.events.subscribe((val) => {
+      if(val instanceof NavigationEnd){
+        if(this._Router.url == '/Inicio'){
+          this.Conexiones = this._Conexion.RetornarConexiones();
+        }
+      }
+    });
+  }
 
   ngOnInit() {
-    this.Conexiones = [];
+    this.Conexiones = this._Conexion.RetornarConexiones();
   }
 
   Agregar(): void {

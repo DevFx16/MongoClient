@@ -22,7 +22,7 @@ export class MongoConexionService {
     if (Local) {
       this.Arr = JSON.parse(Local);
       this.Arr.map(Item => {
-        if(Item.Url == Url){
+        if (Item.Url == Url) {
           R = true;
         }
       });
@@ -31,6 +31,12 @@ export class MongoConexionService {
       this.Arr = [];
       return false;
     }
+  }
+
+  RetornarConexiones(): Conexion[] {
+    var Local = localStorage.getItem('Conexiones');
+    this.Arr = Local ? JSON.parse(Local) : [];
+    return this.Arr;
   }
 
   Guardar(Obje: Conexion) {
