@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import Conexion from '../../Models/Conexion';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -36,6 +37,14 @@ export class MongoConexionService {
   RetornarConexiones(): Conexion[] {
     var Local = localStorage.getItem('Conexiones');
     this.Arr = Local ? JSON.parse(Local) : [];
+    return this.Arr;
+  }
+
+  EliminarConexion(index: number): Conexion[]{
+    var Local = localStorage.getItem('Conexiones');
+    this.Arr = Local ? JSON.parse(Local) : [];
+    this.Arr.splice(index, 1)
+    localStorage.setItem('Conexiones', JSON.stringify(this.Arr));
     return this.Arr;
   }
 
