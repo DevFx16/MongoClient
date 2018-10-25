@@ -64,7 +64,7 @@ export class AgregarPage implements OnInit {
       await Load.present();
       await this._Conexion.Conexion(this.Conexion.Url).then(json => {
         Load.dismiss();
-        this._Conexion.Guardar(new Conexion(this.Conexion.Url, 'Hola Mundo'));
+        this._Conexion.Guardar(this.Conexion.Url, json);
         swal('Agregado', 'La conexión se ha hecho satisfactoriamente', 'success');
       }).catch(err => {
         Load.dismiss();

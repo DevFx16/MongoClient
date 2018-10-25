@@ -48,15 +48,15 @@ export class MongoConexionService {
     return this.Arr;
   }
 
-  Guardar(Obje: Conexion) {
+  Guardar(Url: string, Base: any) {
     var Local = localStorage.getItem('Conexiones');
     if (Local) {
       this.Arr = JSON.parse(Local);
-      this.Arr.push(Obje);
+      this.Arr.push(new Conexion(Url, Base.BaseDatos as string));
       localStorage.setItem('Conexiones', JSON.stringify(this.Arr));
     } else {
       this.Arr = [];
-      this.Arr.push(Obje);
+      this.Arr.push(new Conexion(Url, Base.BaseDatos as string));
       localStorage.setItem('Conexiones', JSON.stringify(this.Arr));
     }
   }
