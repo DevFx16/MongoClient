@@ -40,9 +40,11 @@ export class AgregarPage implements OnInit {
           if (this.Conexion.User.length <= 0 || this.Conexion.Password.length <= 0) {
             swal('Error', 'Todos los campos son requeridos', 'error');
           } else {
+            this.Conexion.Url = 'mongodb://'+this.Conexion.User+':'+this.Conexion.Password+'@'+this.Conexion.Host+':'+this.Conexion.Puerto+'/'+this.Conexion.Base
             this.Peticion();
           }
         } else {
+          this.Conexion.Url = 'mongodb://'+this.Conexion.Host+':'+this.Conexion.Puerto+'/'+this.Conexion.Base
           this.Peticion();
         }
       }
@@ -66,7 +68,7 @@ export class AgregarPage implements OnInit {
         swal('Agregado', 'La conexión se ha hecho satisfactoriamente', 'success');
       }).catch(err => {
         Load.dismiss();
-        swal('Agregado', err.error.Error, 'error');
+        err.error.Error ? swal('Agregado', err.error.Error, 'error') : swal('Agregado', 'No autorizado revise sus datos', 'error');
       })
     }
   }
