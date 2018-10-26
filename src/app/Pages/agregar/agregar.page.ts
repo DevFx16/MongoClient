@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MongoConexionService } from '../../Services/MongoConexion/mongo-conexion.service';
 import { Router } from '@angular/router';
 import swal from 'sweetalert';
+import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free/ngx';
 import { LoadingController } from '@ionic/angular';
-import Conexion from '../../Models/Conexion';
 
 @Component({
   selector: 'app-agregar',
@@ -15,10 +15,19 @@ export class AgregarPage implements OnInit {
 
   Opcion: boolean = false;
   Conexion = { Host: '', Puerto: 80, Base: '', Auth: false, User: '', Password: '', Url: '' };
+  ConfigBanner: AdMobFreeBannerConfig = {
+    autoShow: true,
+    bannerAtTop: false,
+    id: 'ca-app-pub-9624629768425340/1714816516',
+    isTesting: false,
+  }
 
-  constructor(private _Conexion: MongoConexionService, private _Router: Router, public Loading: LoadingController) { }
+  constructor(private _Ads: AdMobFree, private _Conexion: MongoConexionService, private _Router: Router, public Loading: LoadingController) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this._Ads.banner.config(this.ConfigBanner);
+    this._Ads.banner.prepare().then(json => { }).catch(err => { console.log(err) });
+  }
 
   Select(Valor): void {
     this.Opcion = Valor == '1';
@@ -40,11 +49,11 @@ export class AgregarPage implements OnInit {
           if (this.Conexion.User.length <= 0 || this.Conexion.Password.length <= 0) {
             swal('Error', 'Todos los campos son requeridos', 'error');
           } else {
-            this.Conexion.Url = 'mongodb://'+this.Conexion.User+':'+this.Conexion.Password+'@'+this.Conexion.Host+':'+this.Conexion.Puerto+'/'+this.Conexion.Base
+            this.Conexion.Url = 'mongodb://' + this.Conexion.User + ':' + this.Conexion.Password + '@' + this.Conexion.Host + ':' + this.Conexion.Puerto + '/' + this.Conexion.Base
             this.Peticion();
           }
         } else {
-          this.Conexion.Url = 'mongodb://'+this.Conexion.Host+':'+this.Conexion.Puerto+'/'+this.Conexion.Base
+          this.Conexion.Url = 'mongodb://' + this.Conexion.Host + ':' + this.Conexion.Puerto + '/' + this.Conexion.Base
           this.Peticion();
         }
       }

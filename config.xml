@@ -82,6 +82,8 @@
     <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
     <plugin name="cordova-plugin-ionic-webview" spec="^2.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
+    <plugin name="cordova-plugin-admob-free" spec="0.21.0">
+        <variable name="ADMOB_APP_ID" value="ca-app-pub-9624629768425340~9784878224" />
+    </plugin>
     <engine name="android" spec="7.1.1" />
-    <engine name="ios" spec="4.5.5" />
 </widget>
