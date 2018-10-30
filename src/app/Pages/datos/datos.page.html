@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button fill="clear" slot="start" [routerLink]="['/Inicio']" routerLinkActive="router-link-active">
+      <ion-icon slot="icon-only" name="md-arrow-round-back" color="success"></ion-icon>
+    </ion-button>
+    <ion-title>{{this.Datos.BaseDatos}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="md-person-add" color="success"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="md-trash" color="danger"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="md-add-circle" color="success"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-refresher slot="fixed" (ionRefresh)="this.Refrescar($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" refreshingSpinner="circles"></ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="this.Colecciones.length > 0; else Imagen">
+    <ion-list>
+
+    </ion-list>
+  </div>
+  <ng-template #Imagen>
+    <ion-img style="height: 100%;" src="https://icon-icons.com/icons2/1353/PNG/512/if-word-18-2875628_88181.png"></ion-img>
+  </ng-template>
+</ion-content>

@@ -11,7 +11,7 @@ export class MongoConexionService {
   UrlBase: string = 'https://mongoclient.herokuapp.com/';
   Arr: Conexion[];
 
-  constructor(private Http: HttpClient, ) { }
+  constructor(private Http: HttpClient) { }
 
   Conexion(Url: string) {
     return this.Http.get(this.UrlBase + 'Conexion', { headers: new HttpHeaders().set('url', Url) }).toPromise();

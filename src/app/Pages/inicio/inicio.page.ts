@@ -48,7 +48,7 @@ export class InicioPage implements OnInit {
     }, 1500);
   }
 
-  async Accion(index: number) {
+  async Accion(index: number, Item: Conexion) {
     const actionSheet = await this._Action.create({
       header: 'Opciones',
       buttons: [{
@@ -62,7 +62,7 @@ export class InicioPage implements OnInit {
         text: 'Ver',
         icon: 'ios-eye',
         handler: () => {
-          console.log('Play clicked');
+          this._Router.navigate(['/Datos', Item]);
         }
       }, {
         text: 'Clancelar',
