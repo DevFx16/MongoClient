@@ -16,10 +16,14 @@ export class DatosPage implements OnInit {
   constructor(private _Router: Router, private _Conexion: MongoConexionService, private _Params: ActivatedRoute) {
     this._Params.params.subscribe(Params => {
       this.Datos = Params as Conexion;
-    });
+     });
   }
 
   Refrescar(event){
+
+  }
+
+  ListarColeccion(): void{
 
   }
 
