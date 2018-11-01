@@ -16,6 +16,7 @@ export class DatosPage implements OnInit {
   Datos: Conexion;
   Colecciones: string[] = [];
   Seleccion: number = -1;
+  SeleccionId: number = -1;
 
   constructor(private _Router: Router, private _Conexion: MongoConexionService, private _Params: ActivatedRoute, private _Coleccion: MongoColeccionService, public Loading: LoadingController) {
     this._Params.params.subscribe(Params => {
@@ -24,7 +25,16 @@ export class DatosPage implements OnInit {
   }
 
   Refrescar(event) {
-
+    this.Seleccion = -1;
+    this.SeleccionId = -1;
+    this._Coleccion.Listar(this.Datos.Url).then(json => {
+      this.Colecciones = (json as any).Colecciones;
+      event.target.complete();
+    }).catch(err => {
+      this.Colecciones = [];
+      event.target.complete();
+      swal('Agregado', 'Ha ocurrido un error vuelva a intentar', 'error');
+    })
   }
 
 
@@ -36,7 +46,7 @@ export class DatosPage implements OnInit {
       mode: 'ios',
     });
     await Load.present();
-    this._Coleccion.Listar(this.Datos.Url).then(json => {
+    return this._Coleccion.Listar(this.Datos.Url).then(json => {
       this.Colecciones = (json as any).Colecciones;
       Load.dismiss();
     }).catch(err => {
