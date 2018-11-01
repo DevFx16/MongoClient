@@ -10,13 +10,7 @@ export class MongoColeccionService {
 
   constructor(private Http: HttpClient) { }
 
-  Listar(Url: string, Cole: string): string[] {
-    var N = [];
-    this.Http.get(this.UrlBase + '/ListarColeccion', { headers: new HttpHeaders().set('url', Url).set('coleccion', Cole)}).toPromise().then(json => {
-
-    }).catch(err => {
-      N = [];
-    })
-    return N;
+  Listar(Url: string): any {
+    return this.Http.get(this.UrlBase + 'Colecciones', { headers: new HttpHeaders().set('url', Url)}).toPromise();
   }
 }

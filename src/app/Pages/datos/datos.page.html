@@ -18,13 +18,29 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <ion-refresher slot="fixed" (ionRefresh)="this.Refrescar($event)">
     <ion-refresher-content pullingIcon="arrow-dropdown" refreshingSpinner="circles"></ion-refresher-content>
   </ion-refresher>
-  <div *ngIf="this.Colecciones.length > 0; else Imagen">
-    <ion-list>
-
+  <div *ngIf="this.Colecciones.length > 0; else Imagen" style="padding-top: 20px">
+    <ion-list *ngFor="let item of this.Colecciones; let i = index">
+      <ion-item lines="full">
+        <ion-button fill="clear" (click)="this.Seleccion = i == this.Seleccion ? -1 : i;">
+          <ion-icon slot="icon-only" name="arrow-forward" color="success" *ngIf="this.Seleccion != i"></ion-icon>
+          <ion-icon slot="icon-only" name="arrow-down" color="success" *ngIf="this.Seleccion == i"></ion-icon>
+        </ion-button>
+        <ion-label>{{item}}</ion-label>
+        <ion-buttons>
+          <ion-button fill="clear">
+            <ion-icon slot="icon-only" name="md-close" color="danger"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear">
+            <ion-icon slot="icon-only" name="md-add" color="success"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+      <ion-item *ngIf="this.Seleccion == i" lines="full">
+      </ion-item>
     </ion-list>
   </div>
   <ng-template #Imagen>
