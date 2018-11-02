@@ -11,6 +11,10 @@ export class MongoColeccionService {
   constructor(private Http: HttpClient) { }
 
   Listar(Url: string): any {
-    return this.Http.get(this.UrlBase + 'Colecciones', { headers: new HttpHeaders().set('url', Url)}).toPromise();
+    return this.Http.get(this.UrlBase + 'Colecciones', { headers: new HttpHeaders().set('url', Url) }).toPromise();
+  }
+
+  DocumentosColeccion(Url: string, Coleccion: string) {
+    return this.Http.get(this.UrlBase + 'ListarColeccion', { headers: new HttpHeaders().set('url', Url).set('coleccion', Coleccion) }).toPromise();
   }
 }

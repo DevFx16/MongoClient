@@ -77,7 +77,7 @@ export class AgregarPage implements OnInit {
         swal('Agregado', 'La conexión se ha hecho satisfactoriamente', 'success');
       }).catch(err => {
         Load.dismiss();
-        err.error.Error ? swal('Agregado', err.error.Error, 'error') : swal('Agregado', 'No autorizado revise sus datos', 'error');
+        err.error.Error ? swal('Error', err.error.Error, 'error') : swal('Error', 'No autorizado revise sus datos', 'error');
       })
     }
   }

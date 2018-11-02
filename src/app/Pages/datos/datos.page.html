@@ -1,20 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-button fill="clear" slot="start" [routerLink]="['/Inicio']" routerLinkActive="router-link-active">
-      <ion-icon slot="icon-only" name="md-arrow-round-back" color="success"></ion-icon>
+    <ion-button fill="clear" slot="end" (click)="this.Accion()">
+      <ion-icon slot="icon-only" name="md-menu" color="success"></ion-icon>
     </ion-button>
     <ion-title>{{this.Datos.BaseDatos}}</ion-title>
-    <ion-buttons slot="end">
-      <ion-button fill="clear">
-        <ion-icon slot="icon-only" name="md-person-add" color="success"></ion-icon>
-      </ion-button>
-      <ion-button fill="clear">
-        <ion-icon slot="icon-only" name="md-trash" color="danger"></ion-icon>
-      </ion-button>
-      <ion-button fill="clear">
-        <ion-icon slot="icon-only" name="md-add-circle" color="success"></ion-icon>
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -25,7 +14,7 @@
   <div *ngIf="this.Colecciones.length > 0; else Imagen" style="padding-top: 20px">
     <ion-list *ngFor="let item of this.Colecciones; let i = index">
       <ion-item lines="full">
-        <ion-button fill="clear" (click)="this.Seleccion = i == this.Seleccion ? -1 : i;">
+        <ion-button fill="clear" (click)="this.Documentos(i, item)">
           <ion-icon slot="icon-only" name="arrow-forward" color="success" *ngIf="this.Seleccion != i"></ion-icon>
           <ion-icon slot="icon-only" name="arrow-down" color="success" *ngIf="this.Seleccion == i"></ion-icon>
         </ion-button>
@@ -40,6 +29,23 @@
         </ion-buttons>
       </ion-item>
       <ion-item *ngIf="this.Seleccion == i" lines="full">
+        <ion-spinner name="dots" *ngIf="this.Spin"></ion-spinner>
+        <ion-list>
+          <ion-item *ngFor="let Docs of this.DocumentosCol; let i = index">
+            <ion-button fill="clear" (click)="this.SelectId(Docs._id, i)">
+              <ion-icon slot="icon-only" name="arrow-forward" color="success" *ngIf="this.SeleccionId != Docs._id"></ion-icon>
+              <ion-icon slot="icon-only" name="arrow-down" color="success" *ngIf="this.SeleccionId == Docs._id"></ion-icon>
+            </ion-button>
+            <ion-label>{{Docs._id}}</ion-label>
+            <ion-grid>
+              <ion-row *ngIf="this.SeleccionId == Docs._id">
+                <ion-col size="12">
+                  <ion-label>{{this.Doc}}</ion-label>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-list>
       </ion-item>
     </ion-list>
   </div>
