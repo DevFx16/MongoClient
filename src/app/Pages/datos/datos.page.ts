@@ -11,6 +11,7 @@ import swal from 'sweetalert';
   templateUrl: './datos.page.html',
   styleUrls: ['./datos.page.scss'],
 })
+
 export class DatosPage implements OnInit {
 
   Datos: Conexion;
@@ -119,7 +120,6 @@ export class DatosPage implements OnInit {
         this._Coleccion.DocumentosColeccion(this.Datos.Url, item).then(json => {
           this.DocumentosCol = (json as any).Docs as any[];
           localStorage.setItem(item, JSON.stringify(this.DocumentosCol));
-          console.log(json);
           this.Spin = false;
         }).catch(err => {
           this.Seleccion = -1;
@@ -133,7 +133,7 @@ export class DatosPage implements OnInit {
     this.Select = false;
     this.SeleccionId = Id == this.SeleccionId ? '' : Id;
     if (this.SeleccionId.length > 0) {
-      this.Doc = JSON.stringify(this.DocumentosCol[i]);
+      this.Doc = this.DocumentosCol[i];
       this.Select = true;
     }
   }
