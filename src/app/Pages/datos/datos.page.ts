@@ -73,7 +73,6 @@ export class DatosPage implements OnInit {
     await actionSheet.present();
   }
 
-
   Refrescar(event) {
     this.Seleccion = -1;
     this.SeleccionId = '';
@@ -100,7 +99,7 @@ export class DatosPage implements OnInit {
     await Load.present();
     return this._Coleccion.Listar(this.Datos.Url).then(json => {
       this.Colecciones = (json as any).Colecciones;
-      this.Colecciones.shift();
+      this.Colecciones.splice(this.Colecciones.indexOf('system.indexes'), 1);
       Load.dismiss();
     }).catch(err => {
       Load.dismiss();
@@ -111,6 +110,8 @@ export class DatosPage implements OnInit {
   Documentos(i: number, item: string): void {
     this.Spin = true;
     this.Seleccion = i == this.Seleccion ? -1 : i;
+    this.Select = true;
+    this.SeleccionId = '';
     if (this.Seleccion != -1) {
       var N = JSON.parse(localStorage.getItem(item));
       if (N) {
@@ -135,6 +136,8 @@ export class DatosPage implements OnInit {
     if (this.SeleccionId.length > 0) {
       this.Doc = this.DocumentosCol[i];
       this.Select = true;
+    }else{
+      this.Doc = {};
     }
   }
 
