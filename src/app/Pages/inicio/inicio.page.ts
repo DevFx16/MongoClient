@@ -19,12 +19,12 @@ export class InicioPage implements OnInit {
     bannerAtTop: false,
     id: 'ca-app-pub-9624629768425340/1714816516',
     isTesting: false,
-  }
+  };
 
   constructor(private _Ads: AdMobFree, private _Router: Router, private _Conexion: MongoConexionService, private _Action: ActionSheetController) {
     this._Router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
-        if (this._Router.url == '/Inicio') {
+        if (this._Router.url === '/Inicio') {
           this.Conexiones = this._Conexion.RetornarConexiones();
         }
       }
@@ -33,7 +33,7 @@ export class InicioPage implements OnInit {
 
   ngOnInit() {
     this._Ads.banner.config(this.ConfigBanner);
-    this._Ads.banner.prepare().then(json => { }).catch(err => { console.log(err) });
+    this._Ads.banner.prepare().then(json => { }).catch(err => { console.log(err); });
     this.Conexiones = this._Conexion.RetornarConexiones();
   }
 
@@ -89,7 +89,7 @@ export class InicioPage implements OnInit {
         if (value) {
           this._Conexion.EliminarConexion(index);
         }
-      })
+      });
     }
   }
 
