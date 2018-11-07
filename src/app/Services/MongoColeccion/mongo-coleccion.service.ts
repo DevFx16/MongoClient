@@ -26,4 +26,10 @@ export class MongoColeccionService {
       headers: new HttpHeaders().set("url", Url).set("coleccion", Coleccion)
     }).toPromise();
   }
+
+  EliminarDocumento(Url: string, Coleccion: string, Id: string){
+    return this.Http.delete(this.UrlBase + "EliminarDoc", {
+      headers: new HttpHeaders().set("url", Url).set("coleccion", Coleccion).set("id", Id)
+    }).toPromise();
+  }
 }

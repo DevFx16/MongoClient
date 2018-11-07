@@ -82,7 +82,7 @@ export class DatosPage implements OnInit {
     this.Seleccion = -1;
     this.SeleccionId = "";
     this.Colecciones.forEach(element => {
-      localStorage.removeItem(element);
+      localStorage.removeItem(this.Datos.BaseDatos + "/" + element);
     });
     this._Coleccion
       .Listar(this.Datos.Url)
@@ -131,6 +131,31 @@ export class DatosPage implements OnInit {
               this.Colecciones.splice(this.Colecciones.indexOf(Item), 1);
               this.DocumentosCol = [];
               localStorage.removeItem(this.Datos.BaseDatos + "/" + Item);
+              Load.dismiss();
+            })
+            .catch(err => {
+              Load.dismiss();
+              swal("Error", "Ha ocurrido un error vuelva a intentar", "error");
+            });
+        }
+      }
+    );
+  }
+
+  EliminarDocumento(Doc: any, Item: string) {
+    this.Confirm("¿Seguro que desea eliminar este documento?", "Eliminar").then(
+      async valor => {
+        if (valor) {
+          const Load = await this.Cargando();
+          await Load.present();
+          this._Coleccion
+            .EliminarDocumento(this.Datos.Url, Item, Doc._id)
+            .then(json => {
+              this.DocumentosCol.splice(this.DocumentosCol.indexOf(Doc), 1);
+              localStorage.setItem(
+                this.Datos.BaseDatos + "/" + Item,
+                JSON.stringify(this.DocumentosCol)
+              );
               Load.dismiss();
             })
             .catch(err => {
