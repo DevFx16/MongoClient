@@ -32,4 +32,10 @@ export class MongoColeccionService {
       headers: new HttpHeaders().set("url", Url).set("coleccion", Coleccion).set("id", Id)
     }).toPromise();
   }
+
+  AgregarColeccion(Url: string, Coleccion: string){
+    return this.Http.post(this.UrlBase + "AgregarColeccion", {
+      headers: new HttpHeaders().set("url", Url).set("coleccion", Coleccion)
+    }).toPromise();
+  }
 }

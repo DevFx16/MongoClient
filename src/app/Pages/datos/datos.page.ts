@@ -12,6 +12,7 @@ import swal from "sweetalert";
   styleUrls: ["./datos.page.scss"]
 })
 export class DatosPage implements OnInit {
+  
   Datos: Conexion;
   Colecciones: string[] = [];
   DocumentosCol: any[] = [];
@@ -56,7 +57,9 @@ export class DatosPage implements OnInit {
         {
           text: "Agregar Colección",
           icon: "md-add-circle",
-          handler: () => {}
+          handler: () => {
+            this.AgregarColeccion();
+          }
         },
         {
           text: "Regresar",
@@ -212,9 +215,46 @@ export class DatosPage implements OnInit {
   Confirm(Titulo: string, Boton: string) {
     return swal({
       title: Titulo,
+      closeOnClickOutside: false,
+      closeOnEsc: false,
       icon: "warning",
       buttons: ["Cancelar", Boton],
       dangerMode: true
+    });
+  }
+
+  Input(Titulo: string, tipo: string) {
+    return swal({
+      text: Titulo,
+      closeOnClickOutside: false,
+      buttons: ["Cancelar", "Ok"],
+      closeOnEsc: false,
+      content: {
+        element: "input",
+        attributes: {
+          type: tipo
+        }
+      }
+    });
+  }
+
+  AgregarColeccion() {
+    this.Input("Nombre de la colección: ", "text").then(async json => {
+      if (json) {
+        let Load = await this.Cargando();
+        await Load.present();
+        this._Coleccion
+          .AgregarColeccion(this.Datos.Url, json as string)
+          .then(col => {
+            this.Colecciones.push((col as any).Nombre);
+            Load.dismiss();
+          })
+          .catch(err => {
+            Load.dismiss();
+            console.log(err);
+            swal("Error", err.Error, "error");
+          });
+      }
     });
   }
 
