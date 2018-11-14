@@ -1,23 +1,22 @@
-import { Component, OnInit } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-import { MongoConexionService } from "../../Services/MongoConexion/mongo-conexion.service";
-import Conexion from "../../Models/Conexion";
-import { MongoColeccionService } from "../../Services/MongoColeccion/mongo-coleccion.service";
-import { LoadingController, ActionSheetController } from "@ionic/angular";
-import swal from "sweetalert";
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { MongoConexionService } from '../../Services/MongoConexion/mongo-conexion.service';
+import Conexion from '../../Models/Conexion';
+import { MongoColeccionService } from '../../Services/MongoColeccion/mongo-coleccion.service';
+import { LoadingController, ActionSheetController } from '@ionic/angular';
+import swal from 'sweetalert';
 
 @Component({
-  selector: "app-datos",
-  templateUrl: "./datos.page.html",
-  styleUrls: ["./datos.page.scss"]
+  selector: 'app-datos',
+  templateUrl: './datos.page.html',
+  styleUrls: ['./datos.page.scss']
 })
 export class DatosPage implements OnInit {
-  
   Datos: Conexion;
   Colecciones: string[] = [];
   DocumentosCol: any[] = [];
   Seleccion: number = -1;
-  SeleccionId: string = "";
+  SeleccionId: string = '';
   Spin: boolean = false;
   Select: boolean = false;
   Doc: any;
@@ -41,89 +40,89 @@ export class DatosPage implements OnInit {
 
   async Accion() {
     const actionSheet = await this._Action.create({
-      header: "Opciones",
+      header: 'Opciones',
       buttons: [
         {
-          text: "Agregar usuario",
-          icon: "md-person-add",
-          handler: () => {}
+          text: 'Agregar usuario',
+          icon: 'md-person-add',
+          handler: () => { }
         },
         {
-          text: "Borrar usuario",
-          role: "destructive",
-          icon: "trash",
-          handler: () => {}
+          text: 'Borrar usuario',
+          role: 'destructive',
+          icon: 'trash',
+          handler: () => { }
         },
         {
-          text: "Agregar Colección",
-          icon: "md-add-circle",
+          text: 'Agregar Colección',
+          icon: 'md-add-circle',
           handler: () => {
             this.AgregarColeccion();
           }
         },
         {
-          text: "Regresar",
-          icon: "md-arrow-back",
+          text: 'Regresar',
+          icon: 'md-arrow-back',
           handler: () => {
-            this._Router.navigate(["/Inicio"]);
+            this._Router.navigate(['/Inicio']);
           }
         },
         {
-          text: "Clancelar",
-          icon: "close",
-          role: "cancel"
+          text: 'Clancelar',
+          icon: 'close',
+          role: 'cancel'
         }
       ],
       backdropDismiss: false,
       keyboardClose: true,
-      mode: "ios"
+      mode: 'ios'
     });
     await actionSheet.present();
   }
 
   Refrescar(event) {
     this.Seleccion = -1;
-    this.SeleccionId = "";
+    this.SeleccionId = '';
     this.Colecciones.forEach(element => {
-      localStorage.removeItem(this.Datos.BaseDatos + "/" + element);
+      localStorage.removeItem(this.Datos.BaseDatos + '/' + element);
     });
     this._Coleccion
       .Listar(this.Datos.Url)
       .then(json => {
         this.Colecciones = (json as any).Colecciones;
-        this.Colecciones.splice(this.Colecciones.indexOf("system.indexes"), 1);
+        this.Colecciones.splice(this.Colecciones.indexOf('system.indexes'), 1);
         event.target.complete();
       })
       .catch(err => {
         this.Colecciones = [];
         event.target.complete();
-        swal("Error", "Ha ocurrido un error vuelva a intentar", "error");
+        swal('Error', 'Ha ocurrido un error vuelva a intentar', 'error');
       });
   }
 
   async ListarCol() {
     const Load = await this.Loading.create({
-      message: "Por favor espere un momento...",
+      message: 'Por favor espere un momento...',
       showBackdrop: false,
-      spinner: "circles",
-      mode: "ios"
+      spinner: 'circles',
+      mode: 'ios'
     });
     await Load.present();
     return this._Coleccion
       .Listar(this.Datos.Url)
       .then(json => {
         this.Colecciones = (json as any).Colecciones;
-        this.Colecciones.splice(this.Colecciones.indexOf("system.indexes"), 1);
+        this.Colecciones.splice(this.Colecciones.indexOf('system.indexes'), 1);
         Load.dismiss();
       })
       .catch(err => {
         Load.dismiss();
-        swal("Error", "Ha ocurrido un error vuelva a intentar", "error");
+        swal('Error', 'Ha ocurrido un error vuelva a intentar', 'error');
       });
   }
 
   EliminarColeccion(Item: string) {
-    this.Confirm("¿Seguro que desea eliminar esta colección?", "Eliminar").then(
+    this.Confirm('¿Seguro que desea eliminar esta colección?', 'Eliminar').then(
       async valor => {
         if (valor) {
           const Load = await this.Cargando();
@@ -133,12 +132,12 @@ export class DatosPage implements OnInit {
             .then(json => {
               this.Colecciones.splice(this.Colecciones.indexOf(Item), 1);
               this.DocumentosCol = [];
-              localStorage.removeItem(this.Datos.BaseDatos + "/" + Item);
+              localStorage.removeItem(this.Datos.BaseDatos + '/' + Item);
               Load.dismiss();
             })
             .catch(err => {
               Load.dismiss();
-              swal("Error", "Ha ocurrido un error vuelva a intentar", "error");
+              swal('Error', 'Ha ocurrido un error vuelva a intentar', 'error');
             });
         }
       }
@@ -146,7 +145,7 @@ export class DatosPage implements OnInit {
   }
 
   EliminarDocumento(Doc: any, Item: string) {
-    this.Confirm("¿Seguro que desea eliminar este documento?", "Eliminar").then(
+    this.Confirm('¿Seguro que desea eliminar este documento?', 'Eliminar').then(
       async valor => {
         if (valor) {
           const Load = await this.Cargando();
@@ -156,14 +155,14 @@ export class DatosPage implements OnInit {
             .then(json => {
               this.DocumentosCol.splice(this.DocumentosCol.indexOf(Doc), 1);
               localStorage.setItem(
-                this.Datos.BaseDatos + "/" + Item,
+                this.Datos.BaseDatos + '/' + Item,
                 JSON.stringify(this.DocumentosCol)
               );
               Load.dismiss();
             })
             .catch(err => {
               Load.dismiss();
-              swal("Error", "Ha ocurrido un error vuelva a intentar", "error");
+              swal('Error', 'Ha ocurrido un error vuelva a intentar', 'error');
             });
         }
       }
@@ -174,10 +173,10 @@ export class DatosPage implements OnInit {
     this.Spin = true;
     this.Seleccion = i === this.Seleccion ? -1 : i;
     this.Select = true;
-    this.SeleccionId = "";
+    this.SeleccionId = '';
     if (this.Seleccion !== -1) {
       const N = JSON.parse(
-        localStorage.getItem(this.Datos.BaseDatos + "/" + item)
+        localStorage.getItem(this.Datos.BaseDatos + '/' + item)
       );
       if (N) {
         this.DocumentosCol = N as any[];
@@ -188,14 +187,14 @@ export class DatosPage implements OnInit {
           .then(json => {
             this.DocumentosCol = (json as any).Docs as any[];
             localStorage.setItem(
-              this.Datos.BaseDatos + "/" + item,
+              this.Datos.BaseDatos + '/' + item,
               JSON.stringify(this.DocumentosCol)
             );
             this.Spin = false;
           })
           .catch(err => {
             this.Seleccion = -1;
-            swal("Error", "Ha ocurrido un error vuelva a intentar", "error");
+            swal('Error', 'Ha ocurrido un error vuelva a intentar', 'error');
           });
       }
     }
@@ -203,7 +202,7 @@ export class DatosPage implements OnInit {
 
   SelectId(Id: string, i: number): void {
     this.Select = false;
-    this.SeleccionId = Id === this.SeleccionId ? "" : Id;
+    this.SeleccionId = Id === this.SeleccionId ? '' : Id;
     if (this.SeleccionId.length > 0) {
       this.Doc = this.DocumentosCol[i];
       this.Select = true;
@@ -217,8 +216,8 @@ export class DatosPage implements OnInit {
       title: Titulo,
       closeOnClickOutside: false,
       closeOnEsc: false,
-      icon: "warning",
-      buttons: ["Cancelar", Boton],
+      icon: 'warning',
+      buttons: ['Cancelar', Boton],
       dangerMode: true
     });
   }
@@ -227,10 +226,10 @@ export class DatosPage implements OnInit {
     return swal({
       text: Titulo,
       closeOnClickOutside: false,
-      buttons: ["Cancelar", "Ok"],
+      buttons: ['Cancelar', 'Ok'],
       closeOnEsc: false,
       content: {
-        element: "input",
+        element: 'input',
         attributes: {
           type: tipo
         }
@@ -238,32 +237,35 @@ export class DatosPage implements OnInit {
     });
   }
 
-  AgregarColeccion() {
-    this.Input("Nombre de la colección: ", "text").then(async json => {
+  async AgregarColeccion() {
+    this.Input('Nombre de la colección: ', 'text').then(async json => {
       if (json) {
         let Load = await this.Cargando();
         await Load.present();
         this._Coleccion
           .AgregarColeccion(this.Datos.Url, json as string)
           .then(col => {
-            this.Colecciones.push((col as any).Nombre);
             Load.dismiss();
+            swal('Agregado: ' + (col as any).Nombre, 'Refresque para ver cambio', 'success');
           })
           .catch(err => {
             Load.dismiss();
-            console.log(err);
-            swal("Error", err.Error, "error");
+            err.error.Error
+              ? swal('Error', err.error.Error, 'error')
+              : swal('Error', 'No autorizado revise sus datos', 'error');
           });
+      } else {
+        swal('Error', 'Proporcione un nombre', 'error');
       }
     });
   }
 
   async Cargando() {
     return this.Loading.create({
-      message: "Por favor espere un momento...",
+      message: 'Por favor espere un momento...',
       showBackdrop: false,
-      spinner: "circles",
-      mode: "ios"
+      spinner: 'circles',
+      mode: 'ios'
     });
   }
 }
