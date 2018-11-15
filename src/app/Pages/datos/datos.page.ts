@@ -237,7 +237,7 @@ export class DatosPage implements OnInit {
     });
   }
 
-  async AgregarColeccion() {
+  AgregarColeccion() {
     this.Input('Nombre de la colección: ', 'text').then(async json => {
       if (json) {
         let Load = await this.Cargando();
@@ -266,6 +266,31 @@ export class DatosPage implements OnInit {
       showBackdrop: false,
       spinner: 'circles',
       mode: 'ios'
+    });
+  }
+
+  CambiarNombre(Col: string) {
+    console.log(Col);
+    this.Input('Nombre de la colección modificada: ', 'text').then(async json => {
+      if (json) {
+        let Load = await this.Cargando();
+        await Load.present();
+        this._Coleccion
+          .CambiarNombre(this.Datos.Url, Col, json as string)
+          .then(col => {
+            Load.dismiss();
+            swal('Modificado: ' + (col as any).Nombre, 'Refresque para ver cambio', 'success');
+          })
+          .catch(err => {
+            Load.dismiss();
+            console.log(err);
+            err.error.Error
+              ? swal('Error', err.error.Error, 'error')
+              : swal('Error', 'No autorizado revise sus datos', 'error');
+          });
+      } else {
+        swal('Error', 'Proporcione un nombre', 'error');
+      }
     });
   }
 }

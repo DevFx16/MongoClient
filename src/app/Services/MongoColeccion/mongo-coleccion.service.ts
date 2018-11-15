@@ -43,4 +43,12 @@ export class MongoColeccionService {
       { headers: new HttpHeaders().set('url', Url).set('coleccion', Coleccion) }
     ).toPromise();
   }
+
+  CambiarNombre(Url: string, Coleccion: string, Nombre: string) {
+    return this.Http.put(
+      this.UrlBase + 'NombreColeccion',
+      { 'Nombre': Nombre, 'Coleccion': Coleccion },
+      { headers: new HttpHeaders().set('url', Url) }
+    ).toPromise();
+  }
 }
