@@ -3,7 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MongoConexionService } from '../../Services/MongoConexion/mongo-conexion.service';
 import Conexion from '../../Models/Conexion';
 import { MongoColeccionService } from '../../Services/MongoColeccion/mongo-coleccion.service';
-import { LoadingController, ActionSheetController } from '@ionic/angular';
+import { LoadingController, ActionSheetController, ModalController } from '@ionic/angular';
+import { AgregarUsuarioPage } from '../agregar-usuario/agregar-usuario.page';
 import swal from 'sweetalert';
 
 @Component({
@@ -27,7 +28,8 @@ export class DatosPage implements OnInit {
     private _Params: ActivatedRoute,
     private _Coleccion: MongoColeccionService,
     public Loading: LoadingController,
-    private _Action: ActionSheetController
+    private _Action: ActionSheetController,
+    public _Modal: ModalController
   ) {
     this._Params.params.subscribe(Params => {
       this.Datos = Params as Conexion;
@@ -45,29 +47,23 @@ export class DatosPage implements OnInit {
         {
           text: 'Agregar usuario',
           icon: 'md-person-add',
-          handler: () => { }
+          handler: () => { this.AgregarUsuario(); }
         },
         {
           text: 'Borrar usuario',
           role: 'destructive',
           icon: 'trash',
-          handler: () => {
-            this.BorrarUsuario();
-          }
+          handler: () => { this.BorrarUsuario(); }
         },
         {
           text: 'Agregar Colección',
           icon: 'md-add-circle',
-          handler: () => {
-            this.AgregarColeccion();
-          }
+          handler: () => { this.AgregarColeccion(); }
         },
         {
           text: 'Regresar',
           icon: 'md-arrow-back',
-          handler: () => {
-            this._Router.navigate(['/Inicio']);
-          }
+          handler: () => { this._Router.navigate(['/Inicio']); }
         },
         {
           text: 'Clancelar',
@@ -300,11 +296,11 @@ export class DatosPage implements OnInit {
         this.Confirm('¿Desea eliminar este usuario ' + json + '? ', 'Eliminar').then(boton => {
           if (boton) {
             this._Conexion.BorrarUsuario(this.Datos.Url, json).then(json2 => {
-              swal('Eliminado', 'Usuario: '+json+' ha sido eliminado satisfactoriamente', 'success');
+              swal('Eliminado', 'Usuario: ' + json + ' ha sido eliminado satisfactoriamente', 'success');
             }).catch(err => {
               err.error.Error
-              ? swal('Error', err.error.Error, 'error')
-              : swal('Error', 'No autorizado revise sus datos', 'error');
+                ? swal('Error', err.error.Error, 'error')
+                : swal('Error', 'No autorizado revise sus datos', 'error');
             });
           }
         })
@@ -312,5 +308,15 @@ export class DatosPage implements OnInit {
         swal('Error', 'Proporcione un nombre', 'error');
       }
     });
+  }
+
+  async AgregarUsuario() {
+    const modal = await this._Modal.create({
+      component: AgregarUsuarioPage,
+      mode: 'ios',
+      keyboardClose: true,
+      backdropDismiss: false
+    });
+    return await modal.present();
   }
 }

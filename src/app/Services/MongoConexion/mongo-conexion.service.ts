@@ -40,7 +40,7 @@ export class MongoConexionService {
     return this.Arr;
   }
 
-  EliminarConexion(index: number): Conexion[]{
+  EliminarConexion(index: number): Conexion[] {
     var Local = localStorage.getItem('Conexiones');
     this.Arr = Local ? JSON.parse(Local) : [];
     this.Arr.splice(index, 1)
@@ -61,7 +61,11 @@ export class MongoConexionService {
     }
   }
 
-  BorrarUsuario(Url: string, User: string){
+  BorrarUsuario(Url: string, User: string) {
     return this.Http.delete(this.UrlBase + 'RemoverUsuario', { headers: new HttpHeaders().set('url', Url).set('username', User) }).toPromise();
+  }
+
+  AgregarUsuario(Url: string, User: string, Pass: string, Role: any[]) {
+    return this.Http.post(this.UrlBase + 'AgregarUsuario', { 'Username': User, 'Password': Pass, 'Role': Role }, { headers: new HttpHeaders().set('url', Url) }).toPromise();
   }
 }

@@ -11,11 +11,13 @@ import { MongoConexionService } from './Services/MongoConexion/mongo-conexion.se
 import { MongoColeccionService } from './Services/MongoColeccion/mongo-coleccion.service';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { AgregarUsuarioPageModule } from './Pages/agregar-usuario/agregar-usuario.module';
+import { EditorPageModule } from './Pages/editor/editor.module';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, AgregarUsuarioPageModule, EditorPageModule],
   providers: [
     StatusBar,
     SplashScreen,
