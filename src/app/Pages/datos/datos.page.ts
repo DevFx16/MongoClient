@@ -51,7 +51,9 @@ export class DatosPage implements OnInit {
           text: 'Borrar usuario',
           role: 'destructive',
           icon: 'trash',
-          handler: () => { }
+          handler: () => {
+            this.BorrarUsuario();
+          }
         },
         {
           text: 'Agregar Colección',
@@ -270,7 +272,6 @@ export class DatosPage implements OnInit {
   }
 
   CambiarNombre(Col: string) {
-    console.log(Col);
     this.Input('Nombre de la colección modificada: ', 'text').then(async json => {
       if (json) {
         let Load = await this.Cargando();
@@ -283,11 +284,30 @@ export class DatosPage implements OnInit {
           })
           .catch(err => {
             Load.dismiss();
-            console.log(err);
             err.error.Error
               ? swal('Error', err.error.Error, 'error')
               : swal('Error', 'No autorizado revise sus datos', 'error');
           });
+      } else {
+        swal('Error', 'Proporcione un nombre', 'error');
+      }
+    });
+  }
+
+  BorrarUsuario() {
+    this.Input('Nombre del usuario a eliminar: ', 'text').then(async json => {
+      if (json) {
+        this.Confirm('¿Desea eliminar este usuario ' + json + '? ', 'Eliminar').then(boton => {
+          if (boton) {
+            this._Conexion.BorrarUsuario(this.Datos.Url, json).then(json2 => {
+              swal('Eliminado', 'Usuario: '+json+' ha sido eliminado satisfactoriamente', 'success');
+            }).catch(err => {
+              err.error.Error
+              ? swal('Error', err.error.Error, 'error')
+              : swal('Error', 'No autorizado revise sus datos', 'error');
+            });
+          }
+        })
       } else {
         swal('Error', 'Proporcione un nombre', 'error');
       }

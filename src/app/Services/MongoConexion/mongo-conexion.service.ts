@@ -60,4 +60,8 @@ export class MongoConexionService {
       localStorage.setItem('Conexiones', JSON.stringify(this.Arr));
     }
   }
+
+  BorrarUsuario(Url: string, User: string){
+    return this.Http.delete(this.UrlBase + 'RemoverUsuario', { headers: new HttpHeaders().set('url', Url).set('username', User) }).toPromise();
+  }
 }
