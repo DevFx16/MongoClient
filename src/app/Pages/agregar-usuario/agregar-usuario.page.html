@@ -2,11 +2,40 @@
   <ion-toolbar>
     <ion-title>Agregar Usuario</ion-title>
     <ion-button fill="clear" slot="end" (click)="this._Modal.dismiss();">
-      <ion-icon slot="icon-only" name="md-close"  color="danger"></ion-icon>
+      <ion-icon slot="icon-only" name="md-close" color="danger"></ion-icon>
     </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-
+  <ion-list>
+    <ion-item-divider color="light">
+      <ion-label>Datos</ion-label>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>Usuario: </ion-label>
+      <ion-input type="text" placeholder="Usuario" clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Contraseña: </ion-label>
+      <ion-input type="password" placeholder="Contraseña" clearInput></ion-input>
+    </ion-item>
+    <ion-radio-group name="Role">
+      <ion-item-divider color="light">
+        <ion-label>Role</ion-label>
+      </ion-item-divider>
+      <ion-item>
+        <ion-label>Read</ion-label>
+        <ion-radio value="read"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>ReadWrite</ion-label>
+        <ion-radio value="readWrite"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+    <ion-button color="success" expand="full" (click)="this.AgregarUsuario()">
+      <ion-icon slot="start" name="md-person-add"></ion-icon>
+      Agregar Usuario
+    </ion-button>
+  </ion-list>
 </ion-content>

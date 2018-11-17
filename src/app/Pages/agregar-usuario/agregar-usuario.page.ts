@@ -14,4 +14,8 @@ export class AgregarUsuarioPage implements OnInit {
 
   }
 
+  AgregarUsuario(){
+    
+  }
+
 }

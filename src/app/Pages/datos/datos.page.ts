@@ -47,7 +47,7 @@ export class DatosPage implements OnInit {
         {
           text: 'Agregar usuario',
           icon: 'md-person-add',
-          handler: () => { this.AgregarUsuario(); }
+          handler: () => { this.Modal(AgregarUsuarioPage); }
         },
         {
           text: 'Borrar usuario',
@@ -310,9 +310,9 @@ export class DatosPage implements OnInit {
     });
   }
 
-  async AgregarUsuario() {
+  async Modal(Page: any) {
     const modal = await this._Modal.create({
-      component: AgregarUsuarioPage,
+      component: Page,
       mode: 'ios',
       keyboardClose: true,
       backdropDismiss: false
