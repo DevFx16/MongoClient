@@ -13,6 +13,7 @@ import swal from 'sweetalert';
   styleUrls: ['./datos.page.scss']
 })
 export class DatosPage implements OnInit {
+
   Datos: Conexion;
   Colecciones: string[] = [];
   DocumentosCol: any[] = [];
@@ -47,7 +48,7 @@ export class DatosPage implements OnInit {
         {
           text: 'Agregar usuario',
           icon: 'md-person-add',
-          handler: () => { this.Modal(AgregarUsuarioPage); }
+          handler: () => { this.Modal(AgregarUsuarioPage, {Conexion: this.Datos}); }
         },
         {
           text: 'Borrar usuario',
@@ -290,14 +291,18 @@ export class DatosPage implements OnInit {
     });
   }
 
-  BorrarUsuario() {
+   BorrarUsuario() {
     this.Input('Nombre del usuario a eliminar: ', 'text').then(async json => {
       if (json) {
-        this.Confirm('¿Desea eliminar este usuario ' + json + '? ', 'Eliminar').then(boton => {
+        this.Confirm('¿Desea eliminar este usuario ' + json + '? ', 'Eliminar').then(async boton => {
           if (boton) {
+            let Load = await this.Cargando();
+            await Load.present();
             this._Conexion.BorrarUsuario(this.Datos.Url, json).then(json2 => {
+              Load.dismiss();
               swal('Eliminado', 'Usuario: ' + json + ' ha sido eliminado satisfactoriamente', 'success');
             }).catch(err => {
+              Load.dismiss();
               err.error.Error
                 ? swal('Error', err.error.Error, 'error')
                 : swal('Error', 'No autorizado revise sus datos', 'error');
@@ -310,9 +315,10 @@ export class DatosPage implements OnInit {
     });
   }
 
-  async Modal(Page: any) {
+  async Modal(Page: any, Data: any) {
     const modal = await this._Modal.create({
       component: Page,
+      componentProps: Data,
       mode: 'ios',
       keyboardClose: true,
       backdropDismiss: false

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import Conexion from '../../Models/Conexion';
+import { Usuario } from '../../Models/Usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -65,7 +66,7 @@ export class MongoConexionService {
     return this.Http.delete(this.UrlBase + 'RemoverUsuario', { headers: new HttpHeaders().set('url', Url).set('username', User) }).toPromise();
   }
 
-  AgregarUsuario(Url: string, User: string, Pass: string, Role: any[]) {
-    return this.Http.post(this.UrlBase + 'AgregarUsuario', { 'Username': User, 'Password': Pass, 'Role': Role }, { headers: new HttpHeaders().set('url', Url) }).toPromise();
+  AgregarUsuario(Url: string, User: Usuario) {
+    return this.Http.post(this.UrlBase + 'AgregarUsuario', User, { headers: new HttpHeaders().set('url', Url) }).toPromise();
   }
 }
