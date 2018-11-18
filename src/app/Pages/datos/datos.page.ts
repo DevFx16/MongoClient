@@ -5,6 +5,7 @@ import Conexion from '../../Models/Conexion';
 import { MongoColeccionService } from '../../Services/MongoColeccion/mongo-coleccion.service';
 import { LoadingController, ActionSheetController, ModalController } from '@ionic/angular';
 import { AgregarUsuarioPage } from '../agregar-usuario/agregar-usuario.page';
+import { EditorPage } from '../editor/editor.page';
 import swal from 'sweetalert';
 
 @Component({
@@ -48,7 +49,7 @@ export class DatosPage implements OnInit {
         {
           text: 'Agregar usuario',
           icon: 'md-person-add',
-          handler: () => { this.Modal(AgregarUsuarioPage, {Conexion: this.Datos}); }
+          handler: () => { this.Modal(AgregarUsuarioPage, { Conexion: this.Datos }); }
         },
         {
           text: 'Borrar usuario',
@@ -291,7 +292,7 @@ export class DatosPage implements OnInit {
     });
   }
 
-   BorrarUsuario() {
+  BorrarUsuario() {
     this.Input('Nombre del usuario a eliminar: ', 'text').then(async json => {
       if (json) {
         this.Confirm('¿Desea eliminar este usuario ' + json + '? ', 'Eliminar').then(async boton => {
@@ -313,6 +314,10 @@ export class DatosPage implements OnInit {
         swal('Error', 'Proporcione un nombre', 'error');
       }
     });
+  }
+
+  AgregarDoc() {
+    this.Modal(EditorPage, { Json: '{}' });
   }
 
   async Modal(Page: any, Data: any) {

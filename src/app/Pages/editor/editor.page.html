@@ -5,7 +5,26 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-item>
-      <ion-textarea placeholder="Enter a description" [(ngModel)]="this.Json"></ion-textarea>
-  </ion-item>
+  <ion-grid fixed style="height: 100%;">
+    <ion-row style="height: 50%;">
+      <ion-col size="12">
+        <ion-item-divider color="light">
+          <ion-label>JSON Editor</ion-label>
+        </ion-item-divider>
+        <ion-item>
+          <ion-textarea rows="10" clearInput [(ngModel)]="this.Json" type="text" (ngModelChange)="this.Cambio();"></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row style="height: 50%;">
+      <ion-col size="12">
+        <ion-item-divider color="light">
+          <ion-label>Pretty</ion-label>
+        </ion-item-divider>
+        <ion-item>
+          <pre>{{this.Pipe | json}}</pre>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

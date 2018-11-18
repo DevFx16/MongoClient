@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavParams, ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-editor',
@@ -7,11 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditorPage implements OnInit {
 
-  Json: string;
+  Json: string = this.navParams.get('Json');
+  Pipe: any;
 
-  constructor() { }
+  constructor(private _Modal: ModalController, private navParams: NavParams) { }
 
   ngOnInit() {
+    this.Cambio();
+  }
+
+  Cambio(){
+    try{
+      this.Pipe = JSON.parse(this.Json);
+    }catch(e){}
   }
 
 }
