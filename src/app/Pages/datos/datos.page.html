@@ -23,7 +23,7 @@
           <ion-button fill="clear" (click)="this.EliminarColeccion(item)">
             <ion-icon slot="icon-only" name="md-close" color="danger"></ion-icon>
           </ion-button>
-          <ion-button fill="clear" (click)="this.AgregarDoc();">
+          <ion-button fill="clear" (click)="this.AgregarDoc(item);">
             <ion-icon slot="icon-only" name="md-add" color="success"></ion-icon>
           </ion-button>
           <ion-button fill="clear" (click)="this.CambiarNombre(item)">
@@ -63,6 +63,6 @@
     </ion-list>
   </div>
   <ng-template #Imagen>
-    <ion-img style="height: 100%;" src="https://icon-icons.com/icons2/1353/PNG/512/if-word-18-2875628_88181.png"></ion-img>
+    <ion-img style="height: 100%;" src="../../../assets/404.png"></ion-img>
   </ng-template>
 </ion-content>

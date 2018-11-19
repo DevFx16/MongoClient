@@ -51,4 +51,13 @@ export class MongoColeccionService {
       { headers: new HttpHeaders().set('url', Url) }
     ).toPromise();
   }
+
+  AgregarDoc(Url: string, Data: any) {
+    return this.Http.post(
+      this.UrlBase + 'AgregarDoc',
+      Data,
+      { headers: new HttpHeaders().set('url', Url) }
+    ).toPromise();
+  }
+
 }

@@ -22,7 +22,7 @@ export class AgregarUsuarioPage implements OnInit {
     Role: [new Roles('', '')]
   }
 
-  constructor(private _Modal: ModalController, private navParams: NavParams, private _Conexion: MongoConexionService, public Loading: LoadingController) {}
+  constructor(public _Modal: ModalController, private navParams: NavParams, private _Conexion: MongoConexionService, public Loading: LoadingController) {}
 
   ngOnInit() {
     this.User.Role = [new Roles('', this.Conexion.BaseDatos)];

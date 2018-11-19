@@ -316,8 +316,8 @@ export class DatosPage implements OnInit {
     });
   }
 
-  AgregarDoc() {
-    this.Modal(EditorPage, { Json: '{}' });
+  AgregarDoc(Col: string) {
+    this.Modal(EditorPage, { Json: '{}', Accion: true, Datos: { Conexion: this.Datos, Col: Col } });
   }
 
   async Modal(Page: any, Data: any) {

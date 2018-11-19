@@ -1,11 +1,14 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Editor</ion-title>
+    <ion-button fill="clear" slot="end" (click)="this._Modal.dismiss();">
+      <ion-icon slot="icon-only" name="md-close" color="danger"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-grid fixed style="height: 100%;">
+  <ion-grid fixed style="height: 90%;">
     <ion-row style="height: 50%;">
       <ion-col size="12">
         <ion-item-divider color="light">
@@ -27,4 +30,7 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  <ion-button color="success" expand="full" (click)="this.BotonAc()">
+    {{this.Boton ? "Agregar": "Actualizar"}}
+  </ion-button>
 </ion-content>
