@@ -320,6 +320,10 @@ export class DatosPage implements OnInit {
     this.Modal(EditorPage, { Json: '{}', Accion: true, Datos: { Conexion: this.Datos, Col: Col } });
   }
 
+  ActualizarDoc(Col: string, Doc: any){
+    this.Modal(EditorPage, { Json: JSON.stringify(Doc), Accion: false, Datos: { Conexion: this.Datos, Col: Col } });
+  }
+
   async Modal(Page: any, Data: any) {
     const modal = await this._Modal.create({
       component: Page,

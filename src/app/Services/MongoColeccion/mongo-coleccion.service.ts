@@ -60,4 +60,12 @@ export class MongoColeccionService {
     ).toPromise();
   }
 
+  ActualizarDoc(Url:string, Data: any){
+    return this.Http.put(
+      this.UrlBase + 'ActualizarDoc',
+      Data,
+      { headers: new HttpHeaders().set('url', Url) }
+    ).toPromise();
+  }
+
 }

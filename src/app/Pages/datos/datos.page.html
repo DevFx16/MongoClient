@@ -47,7 +47,7 @@
                     <ion-button fill="clear" (click)="this.EliminarDocumento(Docs, item)">
                       <ion-icon slot="icon-only" name="md-close" color="danger"></ion-icon>
                     </ion-button>
-                    <ion-button fill="clear">
+                    <ion-button fill="clear" (click)="this.ActualizarDoc(item, Docs)">
                       <ion-icon slot="icon-only" name="md-sync" color="success"></ion-icon>
                     </ion-button>
                   </ion-buttons>
