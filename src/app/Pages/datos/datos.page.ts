@@ -7,6 +7,7 @@ import { LoadingController, ActionSheetController, ModalController } from '@ioni
 import { AgregarUsuarioPage } from '../agregar-usuario/agregar-usuario.page';
 import { EditorPage } from '../editor/editor.page';
 import swal from 'sweetalert';
+import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free/ngx';
 
 @Component({
   selector: 'app-datos',
@@ -23,6 +24,11 @@ export class DatosPage implements OnInit {
   Spin: boolean = false;
   Select: boolean = false;
   Doc: any;
+  ConfigBanner: AdMobFreeBannerConfig = {
+    autoShow: true,
+    id: 'ca-app-pub-9624629768425340/1116329952',
+    isTesting: false
+  };
 
   constructor(
     private _Router: Router,
@@ -31,7 +37,8 @@ export class DatosPage implements OnInit {
     private _Coleccion: MongoColeccionService,
     public Loading: LoadingController,
     private _Action: ActionSheetController,
-    public _Modal: ModalController
+    public _Modal: ModalController,
+    private _Ads: AdMobFree
   ) {
     this._Params.params.subscribe(Params => {
       this.Datos = Params as Conexion;
@@ -40,6 +47,8 @@ export class DatosPage implements OnInit {
 
   ngOnInit() {
     this.ListarCol();
+    this._Ads.banner.config(this.ConfigBanner);
+    this._Ads.banner.prepare().then(json => { }).catch(err => { console.log(err); });
   }
 
   async Accion() {

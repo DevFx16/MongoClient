@@ -11,13 +11,13 @@ import swal from 'sweetalert';
   templateUrl: './inicio.page.html',
   styleUrls: ['./inicio.page.scss'],
 })
+
 export class InicioPage implements OnInit {
 
   Conexiones: Conexion[];
   ConfigBanner: AdMobFreeBannerConfig = {
     autoShow: true,
-    bannerAtTop: false,
-    id: 'ca-app-pub-9624629768425340/1714816516',
+    id: 'ca-app-pub-9624629768425340/1116329952',
     isTesting: false,
   };
 

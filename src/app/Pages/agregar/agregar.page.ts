@@ -10,7 +10,9 @@ import { LoadingController } from '@ionic/angular';
   templateUrl: './agregar.page.html',
   styleUrls: ['./agregar.page.scss']
 })
+
 export class AgregarPage implements OnInit {
+
   Opcion: boolean = false;
   Conexion = {
     Host: '',
@@ -23,8 +25,7 @@ export class AgregarPage implements OnInit {
   };
   ConfigBanner: AdMobFreeBannerConfig = {
     autoShow: true,
-    bannerAtTop: false,
-    id: 'ca-app-pub-9624629768425340/1714816516',
+    id: 'ca-app-pub-9624629768425340/1116329952',
     isTesting: false
   };
 
@@ -33,16 +34,11 @@ export class AgregarPage implements OnInit {
     private _Conexion: MongoConexionService,
     private _Router: Router,
     public Loading: LoadingController
-  ) {}
+  ) { }
 
   ngOnInit() {
     this._Ads.banner.config(this.ConfigBanner);
-    this._Ads.banner
-      .prepare()
-      .then(json => {})
-      .catch(err => {
-        console.log(err);
-      });
+    this._Ads.banner.prepare().then(json => { }).catch(err => { console.log(err); });
   }
 
   Select(Valor): void {
