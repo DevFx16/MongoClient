@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free/ngx';
+import { AdMobFree, AdMobFreeBannerConfig, AdMobFreeInterstitialConfig } from '@ionic-native/admob-free/ngx';
 import { MongoConexionService } from '../../Services/MongoConexion/mongo-conexion.service';
 import { ActionSheetController } from '@ionic/angular';
 import Conexion from '../../Models/Conexion';
@@ -20,6 +20,11 @@ export class InicioPage implements OnInit {
     id: 'ca-app-pub-9624629768425340/1116329952',
     isTesting: false,
   };
+  ConfigInter: AdMobFreeInterstitialConfig = {
+    autoShow: true,
+    id: 'ca-app-pub-9624629768425340/8864502623',
+    isTesting: false,
+  };
 
   constructor(private _Ads: AdMobFree, private _Router: Router, private _Conexion: MongoConexionService, private _Action: ActionSheetController) {
     this._Router.events.subscribe((val) => {
@@ -34,6 +39,8 @@ export class InicioPage implements OnInit {
   ngOnInit() {
     this._Ads.banner.config(this.ConfigBanner);
     this._Ads.banner.prepare().then(json => { }).catch(err => { console.log(err); });
+    this._Ads.interstitial.config(this.ConfigInter);
+    this._Ads.interstitial.prepare().then(json => { }).catch(err => { console.log(err) });
     this.Conexiones = this._Conexion.RetornarConexiones();
   }
 

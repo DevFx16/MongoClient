@@ -7,7 +7,7 @@ import { LoadingController, ActionSheetController, ModalController } from '@ioni
 import { AgregarUsuarioPage } from '../agregar-usuario/agregar-usuario.page';
 import { EditorPage } from '../editor/editor.page';
 import swal from 'sweetalert';
-import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free/ngx';
+import { AdMobFree, AdMobFreeBannerConfig, AdMobFreeInterstitialConfig } from '@ionic-native/admob-free/ngx';
 
 @Component({
   selector: 'app-datos',
@@ -29,7 +29,12 @@ export class DatosPage implements OnInit {
     id: 'ca-app-pub-9624629768425340/1116329952',
     isTesting: false
   };
-
+  ConfigInter: AdMobFreeInterstitialConfig = {
+    autoShow: true,
+    id: 'ca-app-pub-9624629768425340/8864502623',
+    isTesting: false,
+  };
+  
   constructor(
     private _Router: Router,
     private _Conexion: MongoConexionService,
@@ -49,6 +54,8 @@ export class DatosPage implements OnInit {
     this.ListarCol();
     this._Ads.banner.config(this.ConfigBanner);
     this._Ads.banner.prepare().then(json => { }).catch(err => { console.log(err); });
+    this._Ads.interstitial.config(this.ConfigInter);
+    this._Ads.interstitial.prepare().then(json => { }).catch(err => { console.log(err) });
   }
 
   async Accion() {
