@@ -13,7 +13,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AgregarUsuarioPageModule } from './Pages/agregar-usuario/agregar-usuario.module';
 import { EditorPageModule } from './Pages/editor/editor.module';
-import { AppUpdate } from '@ionic-native/app-update';
+import { AppUpdate } from '@ionic-native/app-update/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,10 +23,10 @@ import { AppUpdate } from '@ionic-native/app-update';
     StatusBar,
     SplashScreen,
     AdMobFree,
-    AppUpdate,
     MongoConexionService,
     MongoColeccionService,
     JsonPipe,
+    AppUpdate,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent],
