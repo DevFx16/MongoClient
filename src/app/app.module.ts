@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AgregarUsuarioPageModule } from './Pages/agregar-usuario/agregar-usuario.module';
 import { EditorPageModule } from './Pages/editor/editor.module';
+import { CodePush } from '@ionic-native/code-push/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +26,7 @@ import { EditorPageModule } from './Pages/editor/editor.module';
     MongoConexionService,
     MongoColeccionService,
     JsonPipe,
+    CodePush,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent],
