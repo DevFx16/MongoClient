@@ -26,12 +26,12 @@ export class DatosPage implements OnInit {
   Doc: any;
   ConfigBanner: AdMobFreeBannerConfig = {
     autoShow: true,
-    id: 'ca-app-pub-9624629768425340/1116329952',
+    id: 'ca-app-pub-2081995568317845/1361080721',
     isTesting: false
   };
   ConfigInter: AdMobFreeInterstitialConfig = {
     autoShow: true,
-    id: 'ca-app-pub-9624629768425340/8864502623',
+    id: 'ca-app-pub-2081995568317845/7080311261',
     isTesting: false,
   };
   

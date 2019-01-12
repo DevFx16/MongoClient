@@ -37,7 +37,7 @@ export class AppComponent {
     this._CodePush.sync({
       updateDialog: {
         appendReleaseDescription: true,
-        descriptionPrefix: "\n\nChange log:\n"
+        descriptionPrefix: 'Actualización Pendiente'
       },
       installMode: InstallMode.IMMEDIATE
     }).subscribe(
